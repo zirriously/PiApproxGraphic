@@ -1,6 +1,6 @@
 ﻿namespace PiApproxGraphic
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -52,6 +52,7 @@
             this.StartBtn.TabIndex = 0;
             this.StartBtn.Text = "Start";
             this.StartBtn.UseVisualStyleBackColor = true;
+            this.StartBtn.Click += new System.EventHandler(this.StartBtn_Click);
             // 
             // StopBtn
             // 
@@ -61,6 +62,7 @@
             this.StopBtn.TabIndex = 0;
             this.StopBtn.Text = "Stop";
             this.StopBtn.UseVisualStyleBackColor = true;
+            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
             // SimsLabel
             // 
@@ -131,20 +133,25 @@
             // 
             // IterationsToRunTextBox
             // 
+            this.IterationsToRunTextBox.Enabled = false;
             this.IterationsToRunTextBox.Location = new System.Drawing.Point(10, 226);
             this.IterationsToRunTextBox.Name = "IterationsToRunTextBox";
             this.IterationsToRunTextBox.Size = new System.Drawing.Size(100, 20);
             this.IterationsToRunTextBox.TabIndex = 4;
+            this.IterationsToRunTextBox.TextChanged += new System.EventHandler(this.IterationsToRunTextBox_TextChanged);
             // 
             // RunForeverCheckbox
             // 
             this.RunForeverCheckbox.AutoSize = true;
+            this.RunForeverCheckbox.Checked = true;
+            this.RunForeverCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RunForeverCheckbox.Location = new System.Drawing.Point(11, 205);
             this.RunForeverCheckbox.Name = "RunForeverCheckbox";
             this.RunForeverCheckbox.Size = new System.Drawing.Size(82, 17);
             this.RunForeverCheckbox.TabIndex = 5;
             this.RunForeverCheckbox.Text = "Run forever";
             this.RunForeverCheckbox.UseVisualStyleBackColor = true;
+            this.RunForeverCheckbox.CheckedChanged += new System.EventHandler(this.RunForeverCheckbox_CheckedChanged);
             // 
             // SimThreadsLabel
             // 
@@ -163,6 +170,7 @@
             this.SimThreadsTextbox.Size = new System.Drawing.Size(100, 20);
             this.SimThreadsTextbox.TabIndex = 4;
             this.SimThreadsTextbox.Text = "1";
+            this.SimThreadsTextbox.TextChanged += new System.EventHandler(this.SimThreadsTextbox_TextChanged);
             // 
             // ResetButton
             // 
@@ -172,6 +180,7 @@
             this.ResetButton.TabIndex = 0;
             this.ResetButton.Text = "Reset";
             this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // Form1
             // 
