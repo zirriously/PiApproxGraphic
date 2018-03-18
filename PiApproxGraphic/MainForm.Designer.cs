@@ -140,6 +140,7 @@
             this.IterationsToRunTextBox.Name = "IterationsToRunTextBox";
             this.IterationsToRunTextBox.Size = new System.Drawing.Size(100, 20);
             this.IterationsToRunTextBox.TabIndex = 4;
+            this.IterationsToRunTextBox.Text = "100000";
             this.IterationsToRunTextBox.TextChanged += new System.EventHandler(this.IterationsToRunTextBox_TextChanged);
             // 
             // RunForeverCheckbox
