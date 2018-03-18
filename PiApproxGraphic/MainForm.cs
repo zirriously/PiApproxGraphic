@@ -19,7 +19,7 @@ namespace PiApproxGraphic
         private bool runForever = false;
         private int iterationsToRun = 100000;
         private int iterationsRan = 0;
-        private const int scaling = 500;
+        private const int scaling = 250;
 
         public MainForm()
         {
@@ -35,20 +35,20 @@ namespace PiApproxGraphic
             for (int i = 0; i < iterationsToRun; i++)
             {
                 iterationsRan++;
-                double x = random.NextDouble();
-                double y = random.NextDouble();
+                double x = random.NextDouble() * 2 - 1;
+                double y = random.NextDouble() * 2 - 1;
 
                 if (x * x + y * y < 1.0)
                 {
-                    double xToDraw = x * scaling;
-                    double yToDraw = y * scaling;
+                    double xToDraw = (x * scaling) + 250;
+                    double yToDraw = (y * scaling) + 250;
                     insideUnitCircle++;
                     DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
                 }
                 else
                 {
-                    double xToDraw = x * scaling;
-                    double yToDraw = y * scaling;
+                    double xToDraw = (x * scaling) + 250;
+                    double yToDraw = (y * scaling) + 250;
                     DrawPx(redPx, (int)xToDraw, (int)yToDraw);
                 }
             }
@@ -64,7 +64,7 @@ namespace PiApproxGraphic
         private void StartBtn_Click(object sender, EventArgs e)
         {
             iterationsRan = 0;
-            ApproxPiNum.Text = Calculate().ToString();
+            ApproxPiNum.Text = Calculate().ToString("0.0000000000");
             SimsLabelNum.Text = iterationsRan.ToString();
         }
 
