@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.StartBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
             this.SimsLabel = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@
             this.SimThreadsLabel = new System.Windows.Forms.Label();
             this.SimThreadsTextbox = new System.Windows.Forms.TextBox();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.DrawPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // StartBtn
@@ -182,11 +184,21 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // Form1
+            // DrawPanel
+            // 
+            this.DrawPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DrawPanel.BackgroundImage")));
+            this.DrawPanel.Location = new System.Drawing.Point(132, 8);
+            this.DrawPanel.Name = "DrawPanel";
+            this.DrawPanel.Size = new System.Drawing.Size(576, 576);
+            this.DrawPanel.TabIndex = 7;
+            this.DrawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Paint);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 481);
+            this.ClientSize = new System.Drawing.Size(720, 593);
+            this.Controls.Add(this.DrawPanel);
             this.Controls.Add(this.SimThreadsLabel);
             this.Controls.Add(this.RunForeverCheckbox);
             this.Controls.Add(this.SimThreadsTextbox);
@@ -201,7 +213,7 @@
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.StartBtn);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Pi";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -224,6 +236,7 @@
         private System.Windows.Forms.Label SimThreadsLabel;
         private System.Windows.Forms.TextBox SimThreadsTextbox;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Panel DrawPanel;
     }
 }
 

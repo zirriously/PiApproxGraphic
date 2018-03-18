@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApproxGraphic", "PiApproxGraphic\PiApproxGraphic.csproj", "{C257F702-843B-4B75-961E-4585D6E4D503}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApproxGraphicalSimple", "PiApproxGraphicalSimple\PiApproxGraphicalSimple.csproj", "{AD7FA6CF-1EEC-4F63-81DF-30C0E2D04B17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C257F702-843B-4B75-961E-4585D6E4D503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C257F702-843B-4B75-961E-4585D6E4D503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C257F702-843B-4B75-961E-4585D6E4D503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD7FA6CF-1EEC-4F63-81DF-30C0E2D04B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7FA6CF-1EEC-4F63-81DF-30C0E2D04B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7FA6CF-1EEC-4F63-81DF-30C0E2D04B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7FA6CF-1EEC-4F63-81DF-30C0E2D04B17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
