@@ -145,8 +145,7 @@
             // RunForeverCheckbox
             // 
             this.RunForeverCheckbox.AutoSize = true;
-            this.RunForeverCheckbox.Checked = true;
-            this.RunForeverCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.RunForeverCheckbox.Enabled = false;
             this.RunForeverCheckbox.Location = new System.Drawing.Point(11, 205);
             this.RunForeverCheckbox.Name = "RunForeverCheckbox";
             this.RunForeverCheckbox.Size = new System.Drawing.Size(82, 17);
@@ -191,7 +190,6 @@
             this.DrawPanel.Name = "DrawPanel";
             this.DrawPanel.Size = new System.Drawing.Size(576, 576);
             this.DrawPanel.TabIndex = 7;
-            this.DrawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Paint);
             // 
             // MainForm
             // 

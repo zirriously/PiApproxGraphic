@@ -5,6 +5,7 @@
     xmlns:local="using:PiApproximation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -23,6 +24,8 @@
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
+            <canvas:CanvasControl Draw="CanvasControl_OnDraw" ClearColor="Tomato" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="5" Padding="50"/>
+            <Canvas Grid.ColumnSpan="5" HorizontalAlignment="Left" Height="100" Margin="464,374,-564,-474" Grid.RowSpan="5" VerticalAlignment="Top" Width="100"/>
         </Grid>
     </Grid>
 </Page>
