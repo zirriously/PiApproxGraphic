@@ -13,13 +13,13 @@ namespace PiApproxGraphic
 {
     public partial class MainForm : Form
     {
-        Random rand = new Random();
         private Graphics graphics;
         private Pen redPx = new Pen(Color.Red, 0);
         private Pen bluePx = new Pen(Color.Blue, 0);
         private bool runForever = false;
-        private double iterationsToRun = 100000;
-        private double iterationsRan = 0;
+        private int iterationsToRun = 100000;
+        private int iterationsRan = 0;
+        private const int scaling = 500;
 
         public MainForm()
         {
@@ -27,20 +27,44 @@ namespace PiApproxGraphic
             graphics = DrawPanel.CreateGraphics();
         }
 
-        private void IterateOnce()
+        private double Calculate()
         {
-            iterationsRan++;
-            graphics.DrawRectangle(redPx, rand.Next(3, 572), rand.Next(3, 572), 1, 1);
-            graphics.DrawRectangle(bluePx, rand.Next(3, 572), rand.Next(3, 572), 1, 1);
+            Random random = new Random(Guid.NewGuid().GetHashCode());
+            int insideUnitCircle = 0;
+
+            for (int i = 0; i < iterationsToRun; i++)
+            {
+                iterationsRan++;
+                double x = random.NextDouble();
+                double y = random.NextDouble();
+
+                if (x * x + y * y < 1.0)
+                {
+                    double xToDraw = x * scaling;
+                    double yToDraw = y * scaling;
+                    insideUnitCircle++;
+                    DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
+                }
+                else
+                {
+                    double xToDraw = x * scaling;
+                    double yToDraw = y * scaling;
+                    DrawPx(redPx, (int)xToDraw, (int)yToDraw);
+                }
+            }
+
+            return insideUnitCircle * 4.0 / iterationsRan;
+        }
+
+        private void DrawPx(Pen pen, int x, int y)
+        {
+            graphics.DrawRectangle(pen, x, y, 1, 1);
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < iterationsToRun; i++)
-            {
-                IterateOnce();
-            }
-
+            iterationsRan = 0;
+            ApproxPiNum.Text = Calculate().ToString();
             SimsLabelNum.Text = iterationsRan.ToString();
         }
 
@@ -51,7 +75,10 @@ namespace PiApproxGraphic
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-
+            DrawPanel.Invalidate();
+            iterationsRan = 0;
+            ApproxPiNum.Text = "0";
+            SimsLabelNum.Text = "0";
         }
 
         private void RunForeverCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -61,15 +88,13 @@ namespace PiApproxGraphic
 
         private void IterationsToRunTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            if (IterationsToRunTextBox.Text != string.Empty)
+            {
+                iterationsToRun = Int32.Parse(IterationsToRunTextBox.Text);
+            }
         }
 
         private void SimThreadsTextbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Iterate()
         {
 
         }

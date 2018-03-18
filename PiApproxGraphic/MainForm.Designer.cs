@@ -58,6 +58,7 @@
             // 
             // StopBtn
             // 
+            this.StopBtn.Enabled = false;
             this.StopBtn.Location = new System.Drawing.Point(12, 41);
             this.StopBtn.Name = "StopBtn";
             this.StopBtn.Size = new System.Drawing.Size(98, 23);
@@ -135,7 +136,6 @@
             // 
             // IterationsToRunTextBox
             // 
-            this.IterationsToRunTextBox.Enabled = false;
             this.IterationsToRunTextBox.Location = new System.Drawing.Point(10, 226);
             this.IterationsToRunTextBox.Name = "IterationsToRunTextBox";
             this.IterationsToRunTextBox.Size = new System.Drawing.Size(100, 20);
@@ -157,6 +157,7 @@
             // SimThreadsLabel
             // 
             this.SimThreadsLabel.AutoSize = true;
+            this.SimThreadsLabel.Enabled = false;
             this.SimThreadsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SimThreadsLabel.Location = new System.Drawing.Point(7, 253);
             this.SimThreadsLabel.Name = "SimThreadsLabel";
@@ -166,6 +167,7 @@
             // 
             // SimThreadsTextbox
             // 
+            this.SimThreadsTextbox.Enabled = false;
             this.SimThreadsTextbox.Location = new System.Drawing.Point(11, 269);
             this.SimThreadsTextbox.Name = "SimThreadsTextbox";
             this.SimThreadsTextbox.Size = new System.Drawing.Size(100, 20);
@@ -186,16 +188,17 @@
             // DrawPanel
             // 
             this.DrawPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DrawPanel.BackgroundImage")));
+            this.DrawPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.DrawPanel.Location = new System.Drawing.Point(132, 8);
             this.DrawPanel.Name = "DrawPanel";
-            this.DrawPanel.Size = new System.Drawing.Size(576, 576);
+            this.DrawPanel.Size = new System.Drawing.Size(500, 500);
             this.DrawPanel.TabIndex = 7;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 593);
+            this.ClientSize = new System.Drawing.Size(644, 515);
             this.Controls.Add(this.DrawPanel);
             this.Controls.Add(this.SimThreadsLabel);
             this.Controls.Add(this.RunForeverCheckbox);
