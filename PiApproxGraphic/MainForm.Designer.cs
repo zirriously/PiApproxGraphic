@@ -211,7 +211,7 @@ namespace PiApproxGraphic
             // 
             this.MSPerTickLabel.AutoSize = true;
             this.MSPerTickLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MSPerTickLabel.Location = new System.Drawing.Point(6, 361);
+            this.MSPerTickLabel.Location = new System.Drawing.Point(2, 361);
             this.MSPerTickLabel.Name = "MSPerTickLabel";
             this.MSPerTickLabel.Size = new System.Drawing.Size(72, 13);
             this.MSPerTickLabel.TabIndex = 6;

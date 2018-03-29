@@ -25,11 +25,6 @@ namespace PiApproxGraphic
             StopBtn.Enabled = false;
         }
 
-        private void DrawPx(Pen pen, int x, int y)
-        {
-            _graphics.DrawRectangle(pen, x, y, 1, 1);
-        }
-
         private void StartBtn_Click(object sender, EventArgs e)
         {
             RunCalcTimer.Enabled = true;
@@ -91,7 +86,7 @@ namespace PiApproxGraphic
 
         private void SimThreadsTextbox_TextChanged(object sender, EventArgs e)
         {
-            //TODO 😩
+            //TODO 
         }
 
         private void RunCalcTimer_Tick(object sender, EventArgs e)
