@@ -48,6 +48,8 @@
             this.RunCalcTimer = new System.Windows.Forms.Timer(this.components);
             this.MSPerTickLabel = new System.Windows.Forms.Label();
             this.MSPerTickTextBox = new System.Windows.Forms.TextBox();
+            this.PercentDifferenceLabel = new System.Windows.Forms.Label();
+            this.PercentDifferenceLabelNum = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StartBtn
@@ -112,7 +114,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 159);
+            this.label1.Location = new System.Drawing.Point(7, 156);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 1;
@@ -121,7 +123,7 @@
             // ApproxPiNum
             // 
             this.ApproxPiNum.AutoSize = true;
-            this.ApproxPiNum.Location = new System.Drawing.Point(9, 172);
+            this.ApproxPiNum.Location = new System.Drawing.Point(9, 169);
             this.ApproxPiNum.Name = "ApproxPiNum";
             this.ApproxPiNum.Size = new System.Drawing.Size(13, 13);
             this.ApproxPiNum.TabIndex = 1;
@@ -131,7 +133,7 @@
             // 
             this.IterationsToRunLabel.AutoSize = true;
             this.IterationsToRunLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IterationsToRunLabel.Location = new System.Drawing.Point(7, 187);
+            this.IterationsToRunLabel.Location = new System.Drawing.Point(7, 213);
             this.IterationsToRunLabel.Name = "IterationsToRunLabel";
             this.IterationsToRunLabel.Size = new System.Drawing.Size(97, 13);
             this.IterationsToRunLabel.TabIndex = 3;
@@ -139,7 +141,7 @@
             // 
             // IterationsToRunTextBox
             // 
-            this.IterationsToRunTextBox.Location = new System.Drawing.Point(10, 226);
+            this.IterationsToRunTextBox.Location = new System.Drawing.Point(10, 248);
             this.IterationsToRunTextBox.Name = "IterationsToRunTextBox";
             this.IterationsToRunTextBox.Size = new System.Drawing.Size(100, 20);
             this.IterationsToRunTextBox.TabIndex = 4;
@@ -149,8 +151,7 @@
             // RunForeverCheckbox
             // 
             this.RunForeverCheckbox.AutoSize = true;
-            this.RunForeverCheckbox.Enabled = false;
-            this.RunForeverCheckbox.Location = new System.Drawing.Point(11, 205);
+            this.RunForeverCheckbox.Location = new System.Drawing.Point(11, 230);
             this.RunForeverCheckbox.Name = "RunForeverCheckbox";
             this.RunForeverCheckbox.Size = new System.Drawing.Size(82, 17);
             this.RunForeverCheckbox.TabIndex = 5;
@@ -163,7 +164,7 @@
             this.SimThreadsLabel.AutoSize = true;
             this.SimThreadsLabel.Enabled = false;
             this.SimThreadsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SimThreadsLabel.Location = new System.Drawing.Point(7, 253);
+            this.SimThreadsLabel.Location = new System.Drawing.Point(7, 275);
             this.SimThreadsLabel.Name = "SimThreadsLabel";
             this.SimThreadsLabel.Size = new System.Drawing.Size(111, 13);
             this.SimThreadsLabel.TabIndex = 6;
@@ -172,7 +173,7 @@
             // SimThreadsTextbox
             // 
             this.SimThreadsTextbox.Enabled = false;
-            this.SimThreadsTextbox.Location = new System.Drawing.Point(11, 269);
+            this.SimThreadsTextbox.Location = new System.Drawing.Point(11, 292);
             this.SimThreadsTextbox.Name = "SimThreadsTextbox";
             this.SimThreadsTextbox.Size = new System.Drawing.Size(100, 20);
             this.SimThreadsTextbox.TabIndex = 4;
@@ -207,7 +208,7 @@
             // 
             this.MSPerTickLabel.AutoSize = true;
             this.MSPerTickLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MSPerTickLabel.Location = new System.Drawing.Point(7, 299);
+            this.MSPerTickLabel.Location = new System.Drawing.Point(7, 316);
             this.MSPerTickLabel.Name = "MSPerTickLabel";
             this.MSPerTickLabel.Size = new System.Drawing.Size(72, 13);
             this.MSPerTickLabel.TabIndex = 6;
@@ -215,18 +216,39 @@
             // 
             // MSPerTickTextBox
             // 
-            this.MSPerTickTextBox.Location = new System.Drawing.Point(10, 315);
+            this.MSPerTickTextBox.Location = new System.Drawing.Point(10, 334);
             this.MSPerTickTextBox.Name = "MSPerTickTextBox";
             this.MSPerTickTextBox.Size = new System.Drawing.Size(100, 20);
             this.MSPerTickTextBox.TabIndex = 4;
             this.MSPerTickTextBox.Text = "1";
             this.MSPerTickTextBox.TextChanged += new System.EventHandler(this.MSPerTickTextBox_TextChanged);
             // 
+            // PercentDifferenceLabel
+            // 
+            this.PercentDifferenceLabel.AutoSize = true;
+            this.PercentDifferenceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PercentDifferenceLabel.Location = new System.Drawing.Point(6, 184);
+            this.PercentDifferenceLabel.Name = "PercentDifferenceLabel";
+            this.PercentDifferenceLabel.Size = new System.Drawing.Size(77, 13);
+            this.PercentDifferenceLabel.TabIndex = 8;
+            this.PercentDifferenceLabel.Text = "% difference";
+            // 
+            // PercentDifferenceLabelNum
+            // 
+            this.PercentDifferenceLabelNum.AutoSize = true;
+            this.PercentDifferenceLabelNum.Location = new System.Drawing.Point(10, 198);
+            this.PercentDifferenceLabelNum.Name = "PercentDifferenceLabelNum";
+            this.PercentDifferenceLabelNum.Size = new System.Drawing.Size(13, 13);
+            this.PercentDifferenceLabelNum.TabIndex = 9;
+            this.PercentDifferenceLabelNum.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 515);
+            this.Controls.Add(this.PercentDifferenceLabelNum);
+            this.Controls.Add(this.PercentDifferenceLabel);
             this.Controls.Add(this.DrawPanel);
             this.Controls.Add(this.MSPerTickLabel);
             this.Controls.Add(this.SimThreadsLabel);
@@ -271,6 +293,8 @@
         private System.Windows.Forms.Timer RunCalcTimer;
         private System.Windows.Forms.Label MSPerTickLabel;
         private System.Windows.Forms.TextBox MSPerTickTextBox;
+        private System.Windows.Forms.Label PercentDifferenceLabel;
+        private System.Windows.Forms.Label PercentDifferenceLabelNum;
     }
 }
 

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C257F702-843B-4B75-961E-4585D6E4D503}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>PiApproxGraphic</RootNamespace>
     <AssemblyName>PiApproxGraphic</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
