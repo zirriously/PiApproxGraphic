@@ -1,11 +1,14 @@
-﻿namespace PiApproxGraphic
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace PiApproxGraphic
 {
     partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -280,26 +283,26 @@
 
         #endregion
 
-        private System.Windows.Forms.Button StartBtn;
-        private System.Windows.Forms.Button StopBtn;
-        private System.Windows.Forms.Label SimsLabel;
-        private System.Windows.Forms.Label SimsLabelNum;
-        private System.Windows.Forms.Label PiLabel;
-        private System.Windows.Forms.Label PiLabelNum;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label ApproxPiNum;
-        private System.Windows.Forms.Label IterationsToRunLabel;
-        private System.Windows.Forms.TextBox IterationsToRunTextBox;
-        private System.Windows.Forms.CheckBox RunForeverCheckbox;
-        private System.Windows.Forms.Label SimThreadsLabel;
-        private System.Windows.Forms.TextBox SimThreadsTextbox;
-        private System.Windows.Forms.Button ResetButton;
-        private System.Windows.Forms.Panel DrawPanel;
-        private System.Windows.Forms.Timer RunCalcTimer;
-        private System.Windows.Forms.Label MSPerTickLabel;
-        private System.Windows.Forms.TextBox MSPerTickTextBox;
-        private System.Windows.Forms.Label PercentDifferenceLabel;
-        private System.Windows.Forms.Label PercentDifferenceLabelNum;
+        private Button StartBtn;
+        private Button StopBtn;
+        private Label SimsLabel;
+        private Label SimsLabelNum;
+        private Label PiLabel;
+        private Label PiLabelNum;
+        private Label label1;
+        private Label ApproxPiNum;
+        private Label IterationsToRunLabel;
+        private TextBox IterationsToRunTextBox;
+        private CheckBox RunForeverCheckbox;
+        private Label SimThreadsLabel;
+        private TextBox SimThreadsTextbox;
+        private Button ResetButton;
+        private Panel DrawPanel;
+        private Timer RunCalcTimer;
+        private Label MSPerTickLabel;
+        private TextBox MSPerTickTextBox;
+        private Label PercentDifferenceLabel;
+        private Label PercentDifferenceLabelNum;
     }
 }
 

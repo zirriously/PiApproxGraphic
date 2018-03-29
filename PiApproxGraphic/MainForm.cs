@@ -1,69 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PiApproxGraphic
 {
     public partial class MainForm : Form
     {
-        private Graphics graphics;
-        private Pen redPx = new Pen(Color.Red, 1);
-        private Pen bluePx = new Pen(Color.Blue, 1);
-        private int iterationsToRun = 100000;
-        private int iterationsRan = 0;
-        private const int scaling = 250;
-        Random random = new Random(Guid.NewGuid().GetHashCode());
-        private int insideUnitCircle = 0;
-        private double approximatedPi = 0;
-        private const double pi = 3.1415926535;
-        private double percentDifference = 0;
+        private readonly Graphics _graphics;
+        private readonly Pen _redPx = new Pen(Color.Red, 1);
+        private readonly Pen _bluePx = new Pen(Color.Blue, 1);
+        private int _iterationsToRun = 100000;
+        private int _iterationsRan;
+        private const int Scaling = 250;
+        private readonly Random _random = new Random(Guid.NewGuid().GetHashCode());
+        private int _insideUnitCircle;
+        private double _approximatedPi;
+        private const double Pi = 3.1415926535;
+        private double _percentDifference;
 
         public MainForm()
         {
             InitializeComponent();
-            graphics = DrawPanel.CreateGraphics();
+            _graphics = DrawPanel.CreateGraphics();
             StopBtn.Enabled = false;
         }
 
-        //private double Calculate()
-        //{
-        //    Random random = new Random(Guid.NewGuid().GetHashCode());
-        //    int insideUnitCircle = 0;
-
-        //    for (int i = 0; i < iterationsToRun; i++)
-        //    {
-        //        iterationsRan++;
-        //        double x = random.NextDouble() * 2 - 1;
-        //        double y = random.NextDouble() * 2 - 1;
-
-        //        if (x * x + y * y < 1.0)
-        //        {
-        //            double xToDraw = (x * scaling) + 250;
-        //            double yToDraw = (y * scaling) + 250;
-        //            insideUnitCircle++;
-        //            DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
-        //        }
-        //        else
-        //        {
-        //            double xToDraw = (x * scaling) + 250;
-        //            double yToDraw = (y * scaling) + 250;
-        //            DrawPx(redPx, (int)xToDraw, (int)yToDraw);
-        //        }
-        //    }
-
-        //    return insideUnitCircle * 4.0 / iterationsRan;
-        //}
-
         private void DrawPx(Pen pen, int x, int y)
         {
-            graphics.DrawRectangle(pen, x, y, 1, 1);
+            _graphics.DrawRectangle(pen, x, y, 1, 1);
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -109,10 +73,10 @@ namespace PiApproxGraphic
             IterationsToRunLabel.Enabled = true;
             MSPerTickLabel.Enabled = true;
             //resets vars as to not effect future iterations
-            percentDifference = 0;
-            approximatedPi = 0;
-            insideUnitCircle = 0;
-            iterationsRan = 0;
+            _percentDifference = 0;
+            _approximatedPi = 0;
+            _insideUnitCircle = 0;
+            _iterationsRan = 0;
         }
 
         private void RunForeverCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -122,57 +86,51 @@ namespace PiApproxGraphic
 
         private void IterationsToRunTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IterationsToRunTextBox.Text != string.Empty)
-            {
-                iterationsToRun = Int32.Parse(IterationsToRunTextBox.Text);
-            }
+            if (IterationsToRunTextBox.Text != string.Empty) _iterationsToRun = int.Parse(IterationsToRunTextBox.Text);
         }
 
         private void SimThreadsTextbox_TextChanged(object sender, EventArgs e)
         {
-
+            //TODO 😩
         }
 
         private void RunCalcTimer_Tick(object sender, EventArgs e)
         {
-            if (iterationsRan <= iterationsToRun || RunForeverCheckbox.Checked)
+            if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
             {
                 //Console.WriteLine(iterationsRan);
-                iterationsRan++;
-                double x = random.NextDouble() * 2 - 1;
-                double y = random.NextDouble() * 2 - 1;
-
+                _iterationsRan++;
+                var x = _random.NextDouble() * 2 - 1;
+                var y = _random.NextDouble() * 2 - 1;
                 if (x * x + y * y < 1.0)
                 {
-                    double xToDraw = (x * scaling) + 250;
-                    double yToDraw = (y * scaling) + 250;
-                    insideUnitCircle++;
-                    graphics.DrawEllipse(bluePx, (int)xToDraw, (int)yToDraw, 4, 4);
+                    var xToDraw = x * Scaling + 250;
+                    var yToDraw = y * Scaling + 250;
+                    _insideUnitCircle++;
+                    _graphics.DrawEllipse(_bluePx, (int) xToDraw, (int) yToDraw, 4, 4);
                 }
                 else
                 {
-                    double xToDraw = (x * scaling) + 250;
-                    double yToDraw = (y * scaling) + 250;
-                    graphics.DrawEllipse(redPx, (int)xToDraw, (int)yToDraw, 4, 4);
+                    var xToDraw = x * Scaling + 250;
+                    var yToDraw = y * Scaling + 250;
+                    _graphics.DrawEllipse(_redPx, (int) xToDraw, (int) yToDraw, 4, 4);
                 }
             }
             else
             {
-                this.Enabled = false;
+                Enabled = false;
             }
 
-            approximatedPi = insideUnitCircle * 4.0 / iterationsRan;
-            ApproxPiNum.Text = approximatedPi.ToString("0.0000000000");
-            SimsLabelNum.Text = iterationsRan.ToString();
-            percentDifference = 100 * pi / approximatedPi - 100;
-            PercentDifferenceLabelNum.Text = percentDifference.ToString("0.0000") + '%';
+            _approximatedPi = _insideUnitCircle * 4.0 / _iterationsRan;
+            ApproxPiNum.Text = _approximatedPi.ToString("0.0000000000");
+            SimsLabelNum.Text = _iterationsRan.ToString();
+            _percentDifference = 100 * Pi / _approximatedPi - 100;
+            PercentDifferenceLabelNum.Text = _percentDifference.ToString("0.0000") + '%';
         }
 
         private void MSPerTickTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (MSPerTickTextBox.Text != null)
-                RunCalcTimer.Interval = Int32.Parse(MSPerTickTextBox.Text);
+            if (MSPerTickTextBox.Text != null) RunCalcTimer.Interval = int.Parse(MSPerTickTextBox.Text);
         }
-
     }
 }
