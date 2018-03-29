@@ -29,6 +29,7 @@ namespace PiApproxGraphic
         {
             InitializeComponent();
             graphics = DrawPanel.CreateGraphics();
+            StopBtn.Enabled = false;
         }
 
         //private double Calculate()
@@ -68,20 +69,33 @@ namespace PiApproxGraphic
         private void StartBtn_Click(object sender, EventArgs e)
         {
             RunCalcTimer.Enabled = true;
+            StartBtn.Enabled = false;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
             RunCalcTimer.Enabled = false;
+            StartBtn.Enabled = true;
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
+            //wipe drawbox of darts
             DrawPanel.Invalidate();
-            iterationsRan = 0;
+            //reset labels
             ApproxPiNum.Text = "0";
             SimsLabelNum.Text = "0";
+            PercentDifferenceLabelNum.Text = "0";
+            //stops timer
             RunCalcTimer.Enabled = false;
+            //adjusts buttons
+            StartBtn.Enabled = true;
+            StopBtn.Enabled = false;
+            //resets vars as to not effect future iterations
+            percentDifference = 0;
+            approximatedPi = 0;
+            insideUnitCircle = 0;
+            iterationsRan = 0;
         }
 
         private void RunForeverCheckbox_CheckedChanged(object sender, EventArgs e)
