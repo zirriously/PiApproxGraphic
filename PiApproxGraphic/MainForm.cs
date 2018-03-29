@@ -20,6 +20,9 @@ namespace PiApproxGraphic
         private int iterationsToRun = 100000;
         private int iterationsRan = 0;
         private const int scaling = 250;
+        Random random = new Random(Guid.NewGuid().GetHashCode());
+        private int insideUnitCircle = 0;
+        private double approximatedPi = 0;
 
         public MainForm()
         {
@@ -27,34 +30,34 @@ namespace PiApproxGraphic
             graphics = DrawPanel.CreateGraphics();
         }
 
-        private double Calculate()
-        {
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            int insideUnitCircle = 0;
+        //private double Calculate()
+        //{
+        //    Random random = new Random(Guid.NewGuid().GetHashCode());
+        //    int insideUnitCircle = 0;
 
-            for (int i = 0; i < iterationsToRun; i++)
-            {
-                iterationsRan++;
-                double x = random.NextDouble() * 2 - 1;
-                double y = random.NextDouble() * 2 - 1;
+        //    for (int i = 0; i < iterationsToRun; i++)
+        //    {
+        //        iterationsRan++;
+        //        double x = random.NextDouble() * 2 - 1;
+        //        double y = random.NextDouble() * 2 - 1;
 
-                if (x * x + y * y < 1.0)
-                {
-                    double xToDraw = (x * scaling) + 250;
-                    double yToDraw = (y * scaling) + 250;
-                    insideUnitCircle++;
-                    DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
-                }
-                else
-                {
-                    double xToDraw = (x * scaling) + 250;
-                    double yToDraw = (y * scaling) + 250;
-                    DrawPx(redPx, (int)xToDraw, (int)yToDraw);
-                }
-            }
+        //        if (x * x + y * y < 1.0)
+        //        {
+        //            double xToDraw = (x * scaling) + 250;
+        //            double yToDraw = (y * scaling) + 250;
+        //            insideUnitCircle++;
+        //            DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
+        //        }
+        //        else
+        //        {
+        //            double xToDraw = (x * scaling) + 250;
+        //            double yToDraw = (y * scaling) + 250;
+        //            DrawPx(redPx, (int)xToDraw, (int)yToDraw);
+        //        }
+        //    }
 
-            return insideUnitCircle * 4.0 / iterationsRan;
-        }
+        //    return insideUnitCircle * 4.0 / iterationsRan;
+        //}
 
         private void DrawPx(Pen pen, int x, int y)
         {
@@ -63,14 +66,12 @@ namespace PiApproxGraphic
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            iterationsRan = 0;
-            ApproxPiNum.Text = Calculate().ToString("0.0000000000");
-            SimsLabelNum.Text = iterationsRan.ToString();
+            RunCalcTimer.Enabled = true;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-
+            RunCalcTimer.Enabled = false;
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -79,6 +80,7 @@ namespace PiApproxGraphic
             iterationsRan = 0;
             ApproxPiNum.Text = "0";
             SimsLabelNum.Text = "0";
+            RunCalcTimer.Enabled = false;
         }
 
         private void RunForeverCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -97,6 +99,47 @@ namespace PiApproxGraphic
         private void SimThreadsTextbox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void RunCalcTimer_Tick(object sender, EventArgs e)
+        {
+            if (iterationsRan <= iterationsToRun)
+            {
+                //Console.WriteLine(iterationsRan);
+                iterationsRan++;
+                double x = random.NextDouble() * 2 - 1;
+                double y = random.NextDouble() * 2 - 1;
+
+                if (x * x + y * y < 1.0)
+                {
+                    double xToDraw = (x * scaling) + 250;
+                    double yToDraw = (y * scaling) + 250;
+                    insideUnitCircle++;
+                    DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
+                }
+                else
+                {
+                    double xToDraw = (x * scaling) + 250;
+                    double yToDraw = (y * scaling) + 250;
+                    DrawPx(redPx, (int) xToDraw, (int) yToDraw);
+                }
+            }
+            else
+            {
+                this.Enabled = false;
+            }
+
+            approximatedPi = insideUnitCircle * 4.0 / iterationsRan;
+            ApproxPiNum.Text = approximatedPi.ToString();
+            SimsLabelNum.Text = iterationsRan.ToString();
+
+
+        }
+
+        private void MSPerTickTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (MSPerTickTextBox.Text == null)
+                RunCalcTimer.Interval = Int32.Parse(MSPerTickTextBox.Text);
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.StartBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
@@ -44,6 +45,9 @@
             this.SimThreadsTextbox = new System.Windows.Forms.TextBox();
             this.ResetButton = new System.Windows.Forms.Button();
             this.DrawPanel = new System.Windows.Forms.Panel();
+            this.RunCalcTimer = new System.Windows.Forms.Timer(this.components);
+            this.MSPerTickLabel = new System.Windows.Forms.Label();
+            this.MSPerTickTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // StartBtn
@@ -58,7 +62,6 @@
             // 
             // StopBtn
             // 
-            this.StopBtn.Enabled = false;
             this.StopBtn.Location = new System.Drawing.Point(12, 41);
             this.StopBtn.Name = "StopBtn";
             this.StopBtn.Size = new System.Drawing.Size(98, 23);
@@ -195,14 +198,40 @@
             this.DrawPanel.Size = new System.Drawing.Size(500, 500);
             this.DrawPanel.TabIndex = 7;
             // 
+            // RunCalcTimer
+            // 
+            this.RunCalcTimer.Interval = 1;
+            this.RunCalcTimer.Tick += new System.EventHandler(this.RunCalcTimer_Tick);
+            // 
+            // MSPerTickLabel
+            // 
+            this.MSPerTickLabel.AutoSize = true;
+            this.MSPerTickLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MSPerTickLabel.Location = new System.Drawing.Point(7, 299);
+            this.MSPerTickLabel.Name = "MSPerTickLabel";
+            this.MSPerTickLabel.Size = new System.Drawing.Size(72, 13);
+            this.MSPerTickLabel.TabIndex = 6;
+            this.MSPerTickLabel.Text = "MS per tick";
+            // 
+            // MSPerTickTextBox
+            // 
+            this.MSPerTickTextBox.Location = new System.Drawing.Point(10, 315);
+            this.MSPerTickTextBox.Name = "MSPerTickTextBox";
+            this.MSPerTickTextBox.Size = new System.Drawing.Size(100, 20);
+            this.MSPerTickTextBox.TabIndex = 4;
+            this.MSPerTickTextBox.Text = "1";
+            this.MSPerTickTextBox.TextChanged += new System.EventHandler(this.MSPerTickTextBox_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 515);
             this.Controls.Add(this.DrawPanel);
+            this.Controls.Add(this.MSPerTickLabel);
             this.Controls.Add(this.SimThreadsLabel);
             this.Controls.Add(this.RunForeverCheckbox);
+            this.Controls.Add(this.MSPerTickTextBox);
             this.Controls.Add(this.SimThreadsTextbox);
             this.Controls.Add(this.IterationsToRunTextBox);
             this.Controls.Add(this.IterationsToRunLabel);
@@ -239,6 +268,9 @@
         private System.Windows.Forms.TextBox SimThreadsTextbox;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Panel DrawPanel;
+        private System.Windows.Forms.Timer RunCalcTimer;
+        private System.Windows.Forms.Label MSPerTickLabel;
+        private System.Windows.Forms.TextBox MSPerTickTextBox;
     }
 }
 
