@@ -70,12 +70,24 @@ namespace PiApproxGraphic
         {
             RunCalcTimer.Enabled = true;
             StartBtn.Enabled = false;
+            StopBtn.Enabled = true;
+            RunForeverCheckbox.Enabled = false;
+            IterationsToRunTextBox.Enabled = false;
+            MSPerTickTextBox.Enabled = false;
+            IterationsToRunLabel.Enabled = false;
+            MSPerTickLabel.Enabled = false;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
             RunCalcTimer.Enabled = false;
             StartBtn.Enabled = true;
+            StopBtn.Enabled = false;
+            RunForeverCheckbox.Enabled = true;
+            IterationsToRunTextBox.Enabled = true;
+            MSPerTickTextBox.Enabled = true;
+            IterationsToRunLabel.Enabled = true;
+            MSPerTickLabel.Enabled = true;
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -91,6 +103,11 @@ namespace PiApproxGraphic
             //adjusts buttons
             StartBtn.Enabled = true;
             StopBtn.Enabled = false;
+            RunForeverCheckbox.Enabled = true;
+            IterationsToRunTextBox.Enabled = true;
+            MSPerTickTextBox.Enabled = true;
+            IterationsToRunLabel.Enabled = true;
+            MSPerTickLabel.Enabled = true;
             //resets vars as to not effect future iterations
             percentDifference = 0;
             approximatedPi = 0;
@@ -130,7 +147,6 @@ namespace PiApproxGraphic
                     double xToDraw = (x * scaling) + 250;
                     double yToDraw = (y * scaling) + 250;
                     insideUnitCircle++;
-                    //DrawPx(bluePx, (int)xToDraw, (int)yToDraw);
                     graphics.DrawEllipse(bluePx, (int)xToDraw, (int)yToDraw, 4, 4);
                 }
                 else
@@ -146,16 +162,17 @@ namespace PiApproxGraphic
             }
 
             approximatedPi = insideUnitCircle * 4.0 / iterationsRan;
-            ApproxPiNum.Text = approximatedPi.ToString();
+            ApproxPiNum.Text = approximatedPi.ToString("0.0000000000");
             SimsLabelNum.Text = iterationsRan.ToString();
             percentDifference = 100 * pi / approximatedPi - 100;
-            PercentDifferenceLabelNum.Text = percentDifference.ToString() + '%';
+            PercentDifferenceLabelNum.Text = percentDifference.ToString("0.0000") + '%';
         }
 
         private void MSPerTickTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (MSPerTickTextBox.Text == null)
+            if (MSPerTickTextBox.Text != null)
                 RunCalcTimer.Interval = Int32.Parse(MSPerTickTextBox.Text);
         }
+
     }
 }
