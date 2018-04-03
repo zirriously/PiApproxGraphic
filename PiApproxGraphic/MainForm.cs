@@ -27,39 +27,28 @@ namespace PiApproxGraphic
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            RunCalcTimer.Enabled = true;
-            StartBtn.Enabled = false;
-            StopBtn.Enabled = true;
-            RunForeverCheckbox.Enabled = false;
-            IterationsToRunTextBox.Enabled = false;
-            MSPerTickTextBox.Enabled = false;
-            IterationsToRunLabel.Enabled = false;
-            MSPerTickLabel.Enabled = false;
+            StopBtn.Enabled = RunCalcTimer.Enabled = true;
+
+            StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled =
+                MSPerTickTextBox.Enabled = IterationsToRunLabel.Enabled = MSPerTickLabel.Enabled = false;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            RunCalcTimer.Enabled = false;
-            StartBtn.Enabled = true;
-            StopBtn.Enabled = false;
-            RunForeverCheckbox.Enabled = true;
-            IterationsToRunTextBox.Enabled = true;
-            MSPerTickTextBox.Enabled = true;
-            IterationsToRunLabel.Enabled = true;
-            MSPerTickLabel.Enabled = true;
+            RunCalcTimer.Enabled = StopBtn.Enabled = false;
+
+            StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled =
+                MSPerTickTextBox.Enabled = IterationsToRunLabel.Enabled = MSPerTickLabel.Enabled = true;
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            //wipe drawbox of darts
+            //wipe panel of darts
             DrawPanel.Invalidate();
-            //reset labels
-            ApproxPiNum.Text = "0";
-            SimsLabelNum.Text = "0";
-            PercentDifferenceLabelNum.Text = "0";
-            //stops timer
+
+            ApproxPiNum.Text = SimsLabelNum.Text = PercentDifferenceLabelNum.Text = "0";
+
             RunCalcTimer.Enabled = false;
-            //adjusts buttons
             StartBtn.Enabled = true;
             StopBtn.Enabled = false;
             RunForeverCheckbox.Enabled = true;
