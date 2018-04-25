@@ -49,8 +49,6 @@ namespace PiApproxGraphic
             this.ResetButton = new System.Windows.Forms.Button();
             this.DrawPanel = new System.Windows.Forms.Panel();
             this.RunCalcTimer = new System.Windows.Forms.Timer(this.components);
-            this.MSPerTickLabel = new System.Windows.Forms.Label();
-            this.MSPerTickTextBox = new System.Windows.Forms.TextBox();
             this.PercentDifferenceLabel = new System.Windows.Forms.Label();
             this.PercentDifferenceLabelNum = new System.Windows.Forms.Label();
             this.SimBackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -208,25 +206,6 @@ namespace PiApproxGraphic
             this.RunCalcTimer.Interval = 1;
             this.RunCalcTimer.Tick += new System.EventHandler(this.RunCalcTimer_Tick);
             // 
-            // MSPerTickLabel
-            // 
-            this.MSPerTickLabel.AutoSize = true;
-            this.MSPerTickLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MSPerTickLabel.Location = new System.Drawing.Point(2, 361);
-            this.MSPerTickLabel.Name = "MSPerTickLabel";
-            this.MSPerTickLabel.Size = new System.Drawing.Size(72, 13);
-            this.MSPerTickLabel.TabIndex = 6;
-            this.MSPerTickLabel.Text = "MS per tick";
-            // 
-            // MSPerTickTextBox
-            // 
-            this.MSPerTickTextBox.Location = new System.Drawing.Point(5, 377);
-            this.MSPerTickTextBox.Name = "MSPerTickTextBox";
-            this.MSPerTickTextBox.Size = new System.Drawing.Size(121, 20);
-            this.MSPerTickTextBox.TabIndex = 4;
-            this.MSPerTickTextBox.Text = "1";
-            this.MSPerTickTextBox.TextChanged += new System.EventHandler(this.MSPerTickTextBox_TextChanged);
-            // 
             // PercentDifferenceLabel
             // 
             this.PercentDifferenceLabel.AutoSize = true;
@@ -263,12 +242,10 @@ namespace PiApproxGraphic
             this.Controls.Add(this.IterationsToRunLabel);
             this.Controls.Add(this.PercentDifferenceLabelNum);
             this.Controls.Add(this.DrawPanel);
-            this.Controls.Add(this.MSPerTickLabel);
             this.Controls.Add(this.SimsLabelNum);
             this.Controls.Add(this.PercentDifferenceLabel);
             this.Controls.Add(this.SimsLabel);
             this.Controls.Add(this.SimThreadsLabel);
-            this.Controls.Add(this.MSPerTickTextBox);
             this.Controls.Add(this.SimThreadsTextbox);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.label1);
@@ -306,8 +283,6 @@ namespace PiApproxGraphic
         private Button ResetButton;
         private Panel DrawPanel;
         private Timer RunCalcTimer;
-        private Label MSPerTickLabel;
-        private TextBox MSPerTickTextBox;
         private Label PercentDifferenceLabel;
         private Label PercentDifferenceLabelNum;
         private BackgroundWorker SimBackgroundWorker;

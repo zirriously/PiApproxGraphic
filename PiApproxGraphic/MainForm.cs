@@ -34,8 +34,7 @@ namespace PiApproxGraphic
             SimBackgroundWorker.RunWorkerAsync();
 
             StopBtn.Enabled = true;
-            StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled =
-                MSPerTickTextBox.Enabled = IterationsToRunLabel.Enabled = MSPerTickLabel.Enabled = false;
+            StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled = IterationsToRunLabel.Enabled = false;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -44,8 +43,7 @@ namespace PiApproxGraphic
 
             SimBackgroundWorker.CancelAsync();
 
-            StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled =
-                MSPerTickTextBox.Enabled = IterationsToRunLabel.Enabled = MSPerTickLabel.Enabled = true;
+            StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled = IterationsToRunLabel.Enabled = true;
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -61,9 +59,7 @@ namespace PiApproxGraphic
             StopBtn.Enabled = false;
             RunForeverCheckbox.Enabled = true;
             IterationsToRunTextBox.Enabled = true;
-            MSPerTickTextBox.Enabled = true;
             IterationsToRunLabel.Enabled = true;
-            MSPerTickLabel.Enabled = true;
             //resets vars as to not effect future iterations
             _percentDifference = 0;
             _approximatedPi = 0;
@@ -86,53 +82,53 @@ namespace PiApproxGraphic
             //TODO 
         }
 
-        
-
-
         private void RunCalcTimer_Tick(object sender, EventArgs e)
         {
-            if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
-            {
-                //Console.WriteLine(iterationsRan);
-                _iterationsRan++;
-                var x = _random.NextDouble() * 2 - 1;
-                var y = _random.NextDouble() * 2 - 1;
-                if (x * x + y * y < 1.0)
-                {
-                    var xToDraw = x * Scaling + 250;
-                    var yToDraw = y * Scaling + 250;
-                    _insideUnitCircle++;
-                    _graphics.DrawEllipse(_bluePx, (int) xToDraw, (int) yToDraw, 4, 4);
-                }
-                else
-                {
-                    var xToDraw = x * Scaling + 250;
-                    var yToDraw = y * Scaling + 250;
-                    _graphics.DrawEllipse(_redPx, (int) xToDraw, (int) yToDraw, 4, 4);
-                }
-            }
-            else
-            {
-                Enabled = false;
-            }
+            //Deprecated
 
-            _approximatedPi = _insideUnitCircle * 4.0 / _iterationsRan;
-            ApproxPiNum.Text = _approximatedPi.ToString("0.0000000000");
-            SimsLabelNum.Text = _iterationsRan.ToString();
-            _percentDifference = 100 * Pi / _approximatedPi - 100;
-            PercentDifferenceLabelNum.Text = _percentDifference.ToString("0.0000") + '%';
-        }
+            //if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
+            //{
+            //    //Console.WriteLine(iterationsRan);
+            //    _iterationsRan++;
+            //    var x = _random.NextDouble() * 2 - 1;
+            //    var y = _random.NextDouble() * 2 - 1;
+            //    if (x * x + y * y < 1.0)
+            //    {
+            //        var xToDraw = x * Scaling + 250;
+            //        var yToDraw = y * Scaling + 250;
+            //        _insideUnitCircle++;
+            //        _graphics.DrawEllipse(_bluePx, (int) xToDraw, (int) yToDraw, 4, 4);
+            //    }
+            //    else
+            //    {
+            //        var xToDraw = x * Scaling + 250;
+            //        var yToDraw = y * Scaling + 250;
+            //        _graphics.DrawEllipse(_redPx, (int) xToDraw, (int) yToDraw, 4, 4);
+            //    }
+            //}
+            //else
+            //{
+            //    Enabled = false;
+            //}
 
-        private void MSPerTickTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (MSPerTickTextBox.Text != null) RunCalcTimer.Interval = int.Parse(MSPerTickTextBox.Text);
+            //_approximatedPi = _insideUnitCircle * 4.0 / _iterationsRan;
+            //ApproxPiNum.Text = _approximatedPi.ToString("0.0000000000");
+            //SimsLabelNum.Text = _iterationsRan.ToString();
+            //_percentDifference = 100 * Pi / _approximatedPi - 100;
+            //PercentDifferenceLabelNum.Text = _percentDifference.ToString("0.0000") + '%';
         }
 
         private void SimBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             while (!SimBackgroundWorker.CancellationPending)
             {
-                if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
+                if (_iterationsRan == _iterationsToRun)
+                {
+                    SimBackgroundWorker.ReportProgress(1);
+                    SimBackgroundWorker.CancelAsync();
+                    break;
+                }
+                else if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
                 {
                     //Console.WriteLine(iterationsRan);
                     _iterationsRan++;
@@ -166,10 +162,6 @@ namespace PiApproxGraphic
                         }
                     }
                 }
-                else
-                {
-                    //Enabled = false;
-                }
 
                 SimBackgroundWorker.ReportProgress(1);
             }
@@ -177,7 +169,7 @@ namespace PiApproxGraphic
 
         private void SimBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (_iterationsRan % 1000 == 0)
+            if (_iterationsRan % 1000 == 0 || _iterationsRan == _iterationsToRun)
             {
                 _approximatedPi = _insideUnitCircle * 4.0 / _iterationsRan;
                 ApproxPiNum.Text = _approximatedPi.ToString("0.0000000000");
@@ -189,7 +181,7 @@ namespace PiApproxGraphic
 
         private void SimBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            //TODO (?)
         }
     }
 }
