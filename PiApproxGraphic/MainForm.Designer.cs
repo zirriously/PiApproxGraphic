@@ -52,6 +52,9 @@ namespace PiApproxGraphic
             this.PercentDifferenceLabel = new System.Windows.Forms.Label();
             this.PercentDifferenceLabelNum = new System.Windows.Forms.Label();
             this.SimBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.InsideCircleLabel = new System.Windows.Forms.Label();
+            this.OutsideCircleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StartBtn
@@ -231,12 +234,47 @@ namespace PiApproxGraphic
             this.SimBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.SimBackgroundWorker_ProgressChanged);
             this.SimBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SimBackgroundWorker_RunWorkerCompleted);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 354);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(131, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Inside / outside circle";
+            // 
+            // InsideCircleLabel
+            // 
+            this.InsideCircleLabel.AutoSize = true;
+            this.InsideCircleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InsideCircleLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.InsideCircleLabel.Location = new System.Drawing.Point(0, 367);
+            this.InsideCircleLabel.Name = "InsideCircleLabel";
+            this.InsideCircleLabel.Size = new System.Drawing.Size(14, 13);
+            this.InsideCircleLabel.TabIndex = 11;
+            this.InsideCircleLabel.Text = "0";
+            // 
+            // OutsideCircleLabel
+            // 
+            this.OutsideCircleLabel.AutoSize = true;
+            this.OutsideCircleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OutsideCircleLabel.ForeColor = System.Drawing.Color.Red;
+            this.OutsideCircleLabel.Location = new System.Drawing.Point(0, 380);
+            this.OutsideCircleLabel.Name = "OutsideCircleLabel";
+            this.OutsideCircleLabel.Size = new System.Drawing.Size(14, 13);
+            this.OutsideCircleLabel.TabIndex = 12;
+            this.OutsideCircleLabel.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(644, 515);
+            this.Controls.Add(this.OutsideCircleLabel);
+            this.Controls.Add(this.InsideCircleLabel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.IterationsToRunTextBox);
             this.Controls.Add(this.RunForeverCheckbox);
             this.Controls.Add(this.IterationsToRunLabel);
@@ -286,6 +324,9 @@ namespace PiApproxGraphic
         private Label PercentDifferenceLabel;
         private Label PercentDifferenceLabelNum;
         private BackgroundWorker SimBackgroundWorker;
+        private Label label2;
+        private Label InsideCircleLabel;
+        private Label OutsideCircleLabel;
     }
 }
 

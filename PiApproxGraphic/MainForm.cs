@@ -65,6 +65,7 @@ namespace PiApproxGraphic
             _approximatedPi = 0;
             _insideUnitCircle = 0;
             _iterationsRan = 0;
+            InsideCircleLabel.Text = OutsideCircleLabel.Text = "0";
         }
 
         private void RunForeverCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -122,13 +123,7 @@ namespace PiApproxGraphic
         {
             while (!SimBackgroundWorker.CancellationPending)
             {
-                if (_iterationsRan == _iterationsToRun)
-                {
-                    SimBackgroundWorker.ReportProgress(1);
-                    SimBackgroundWorker.CancelAsync();
-                    break;
-                }
-                else if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
+                if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
                 {
                     //Console.WriteLine(iterationsRan);
                     _iterationsRan++;
@@ -162,6 +157,12 @@ namespace PiApproxGraphic
                         }
                     }
                 }
+                else if (_iterationsRan == _iterationsToRun)
+                {
+                    SimBackgroundWorker.ReportProgress(1);
+                    SimBackgroundWorker.CancelAsync();
+                    break;
+                }
 
                 SimBackgroundWorker.ReportProgress(1);
             }
@@ -176,6 +177,9 @@ namespace PiApproxGraphic
                 SimsLabelNum.Text = _iterationsRan.ToString();
                 _percentDifference = 100 * Pi / _approximatedPi - 100;
                 PercentDifferenceLabelNum.Text = _percentDifference.ToString("0.0000") + '%';
+
+                InsideCircleLabel.Text = _insideUnitCircle.ToString();
+                OutsideCircleLabel.Text = (_iterationsRan - _insideUnitCircle).ToString();
             }
         }
 
