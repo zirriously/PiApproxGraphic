@@ -53,6 +53,7 @@ namespace PiApproxGraphic
             this.MSPerTickTextBox = new System.Windows.Forms.TextBox();
             this.PercentDifferenceLabel = new System.Windows.Forms.Label();
             this.PercentDifferenceLabelNum = new System.Windows.Forms.Label();
+            this.SimBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // StartBtn
@@ -245,6 +246,12 @@ namespace PiApproxGraphic
             this.PercentDifferenceLabelNum.TabIndex = 9;
             this.PercentDifferenceLabelNum.Text = "0";
             // 
+            // SimBackgroundWorker
+            // 
+            this.SimBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.SimBackgroundWorker_DoWork);
+            this.SimBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.SimBackgroundWorker_ProgressChanged);
+            this.SimBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SimBackgroundWorker_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,6 +310,7 @@ namespace PiApproxGraphic
         private TextBox MSPerTickTextBox;
         private Label PercentDifferenceLabel;
         private Label PercentDifferenceLabelNum;
+        private BackgroundWorker SimBackgroundWorker;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -23,19 +24,25 @@ namespace PiApproxGraphic
             InitializeComponent();
             _graphics = DrawPanel.CreateGraphics();
             StopBtn.Enabled = false;
+            SimBackgroundWorker.WorkerSupportsCancellation = true;
+            SimBackgroundWorker.WorkerReportsProgress = true;
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            StopBtn.Enabled = RunCalcTimer.Enabled = true;
+            //RunCalcTimer.Enabled = true;
+            SimBackgroundWorker.RunWorkerAsync();
 
+            StopBtn.Enabled = true;
             StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled =
                 MSPerTickTextBox.Enabled = IterationsToRunLabel.Enabled = MSPerTickLabel.Enabled = false;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            RunCalcTimer.Enabled = StopBtn.Enabled = false;
+            //RunCalcTimer.Enabled = StopBtn.Enabled = false;
+
+            SimBackgroundWorker.CancelAsync();
 
             StartBtn.Enabled = RunForeverCheckbox.Enabled = IterationsToRunTextBox.Enabled =
                 MSPerTickTextBox.Enabled = IterationsToRunLabel.Enabled = MSPerTickLabel.Enabled = true;
@@ -48,7 +55,8 @@ namespace PiApproxGraphic
 
             ApproxPiNum.Text = SimsLabelNum.Text = PercentDifferenceLabelNum.Text = "0";
 
-            RunCalcTimer.Enabled = false;
+            SimBackgroundWorker.CancelAsync();
+
             StartBtn.Enabled = true;
             StopBtn.Enabled = false;
             RunForeverCheckbox.Enabled = true;
@@ -77,6 +85,9 @@ namespace PiApproxGraphic
         {
             //TODO 
         }
+
+        
+
 
         private void RunCalcTimer_Tick(object sender, EventArgs e)
         {
@@ -115,6 +126,70 @@ namespace PiApproxGraphic
         private void MSPerTickTextBox_TextChanged(object sender, EventArgs e)
         {
             if (MSPerTickTextBox.Text != null) RunCalcTimer.Interval = int.Parse(MSPerTickTextBox.Text);
+        }
+
+        private void SimBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!SimBackgroundWorker.CancellationPending)
+            {
+                if (_iterationsRan <= _iterationsToRun || RunForeverCheckbox.Checked)
+                {
+                    //Console.WriteLine(iterationsRan);
+                    _iterationsRan++;
+                    var x = _random.NextDouble() * 2 - 1;
+                    var y = _random.NextDouble() * 2 - 1;
+                    if (x * x + y * y < 1.0)
+                    {
+                        var xToDraw = x * Scaling + 250;
+                        var yToDraw = y * Scaling + 250;
+                        _insideUnitCircle++;
+                        try
+                        {
+                            _graphics.DrawRectangle(_bluePx, (int)xToDraw, (int)yToDraw, 1, 1);
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                        }
+                    }
+                    else
+                    {
+                        var xToDraw = x * Scaling + 250;
+                        var yToDraw = y * Scaling + 250;
+                        try
+                        {
+                            _graphics.DrawRectangle(_redPx, (int)xToDraw, (int)yToDraw, 1, 1);
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                        }
+                    }
+                }
+                else
+                {
+                    //Enabled = false;
+                }
+
+                SimBackgroundWorker.ReportProgress(1);
+            }
+        }
+
+        private void SimBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (_iterationsRan % 1000 == 0)
+            {
+                _approximatedPi = _insideUnitCircle * 4.0 / _iterationsRan;
+                ApproxPiNum.Text = _approximatedPi.ToString("0.0000000000");
+                SimsLabelNum.Text = _iterationsRan.ToString();
+                _percentDifference = 100 * Pi / _approximatedPi - 100;
+                PercentDifferenceLabelNum.Text = _percentDifference.ToString("0.0000") + '%';
+            }
+        }
+
+        private void SimBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
         }
     }
 }
